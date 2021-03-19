@@ -1,0 +1,11 @@
+.combo {
+    font-weight: strong;
+}
+.item-class{
+    height: 50px;
+    width: 50px;
+    max-height: fit-content;
+    font-weight: inherit;
+    font-size: 10px;
+    scroll-behavior: smooth;
+}

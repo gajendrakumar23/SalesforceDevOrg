@@ -1,0 +1,158 @@
+<template>
+
+<!-- Tabset-->
+<lightning-tabset >
+<lightning-tab label = 'Candidate List' id="two" data-id="existingCandidate" >
+    
+    <template for:each={candidateList.data} for:item="candidate">
+        <div class ="slds-scrollable slds_list" key={candidate.Id}>       
+            {candidate.Id}  {candidate.First_Name__c} {candidate.Last_Name__c}        
+        </div>
+    </template>
+    
+</lightning-tab>
+<lightning-tab label = 'New Candidate' id="one" data-id="existingCandidate" >
+            
+    <div class="slds-form-element">
+        <lightning-layout class="slds-grid ">
+            <lightning-layout-item  size="4">
+                    <div class="slds-grid slds-wrap">  
+                    <div class="slds-size_1-of-1">
+                        <lightning-input name="cFName" onchange={handleChange}  data-id ="candidateFName" label="Candidate First Name" placeholder="Enter Candidate First Name"></lightning-input>
+                    </div>
+                    </div>
+                </lightning-layout-item>
+            
+            <lightning-layout-item size="4">
+                <div class="slds-grid slds-wrap">  
+                    <div class="slds-col slds-size_1-of-1">  
+                <lightning-input name="cLName" onchange={handleChange}  data-id ="candidateLName" label="Candidate Last Name" placeholder="Enter Candidate Last Name"></lightning-input>
+                    </div>
+                </div>
+            </lightning-layout-item>
+            
+            
+                <lightning-layout-item  size="4">
+                    <div class="slds-grid slds-wrap">  
+                        <div class="slds-col slds-size_1-of-1">
+                    <lightning-input name="expSal" onchange={handleChange}  data-id ="expectedSalary" label="Expected Salary" placeholder="Expected Salary" type="Number"></lightning-input>
+                    </div>
+                    </div>
+            
+                </lightning-layout-item>
+            </lightning-layout>
+            <lightning-layout>
+            <lightning-layout-item size = "4">
+                <div class="slds-grid slds-wrap">  
+                    <div class="slds-col slds-size_1-of-1">
+            
+                    <lightning-input name="cStatus" type = "List" onchange={handleChange}  data-id ="candidateStatus" label="Status" placeholder="Status"></lightning-input>
+                </div>
+                </div>
+            </lightning-layout-item>            
+            <lightning-layout-item size = "4">
+                    
+                        <label class="slds-form-element__label" for="slider-id-01">
+                            <span class="slds-slider-label">
+                                <span class="slds-slider-label__label">Experience</span>
+                                <span class="slds-slider-label__range">0 - 100</span>
+                            </span>
+                            </label>
+                            <div class="slds-grid slds-wrap">  
+                            <div class="slds-col slds-size_1-of-1">
+                <div class ="slds-slider">
+                    <lightning-input name="experience" onchange={handleChange}  label="Experience ( In Yrs)" data-id ="candidateExp" placeholder="Experience" type="Number"></lightning-input>
+                  
+                    <lightning-input label= "Exp" type="range" step="1" data-id="slider-id-01" class="slds-slider__range" value="5" onchange={handleChange} ondrag={handleChange}></lightning-input>
+                   <span class="slds-slider__value" aria-hidden="true">100</span>
+                    </div>
+                    </div>
+                    </div>
+            </lightning-layout-item>
+                <lightning-layout-item size = "4">
+                    <div class="slds-grid slds-wrap">  
+                        <div class="slds-col slds-size_1-of-1">
+                            <div class="slds-slider">
+                
+                    <lightning-input name="City" onchange={handleChange}  label="City" data-id ="candidateCity" placeholder="City" ></lightning-input>
+                    </div>
+                </div>
+                    </div>
+                    
+                </lightning-layout-item>
+            </lightning-layout>
+<lightning-layout>
+            <lightning-layout-item size = "4">
+                <div class="slds-grid slds-wrap">  
+                    <div class="slds-col slds-size_1-of-1">
+            
+                    <lightning-combobox class="slds-form-element__label" name = "Continent" 
+                    value ={value}
+                    onchange={handleChange} 
+                    label ="Skill"
+                    options={skills}
+                    data-id="techPlatform">
+                        
+                </lightning-combobox> 
+            </div>
+            </div>
+            </lightning-layout-item>
+            <lightning-layout-item size = "4">
+                <div class="slds-grid slds-wrap">  
+                    <div class="slds-col slds-size_1-of-1">
+            
+                    <lightning-combobox class="slds-form-element__label" name = "Country" 
+                    value ={value}
+                    onchange={handleChange} 
+                    label ="Country"
+                    options={countries}
+                    data-id="candidateCountry">
+                        
+                </lightning-combobox>  
+            </div>
+            </div>
+            </lightning-layout-item>
+            <lightning-layout-item size = "4">
+                <div class="slds-grid slds-wrap">  
+                    <div class="slds-col slds-size_1-of-1">
+            
+            <lightning-combobox class="slds-form-element__label" name = "Continent" 
+                value ={value}
+                onchange={handleChange} 
+                label ="Continent"
+                options={continents}
+                data-id="candidateContinent">        
+            </lightning-combobox> 
+            </div>
+            </div>
+            </lightning-layout-item>
+            
+            </lightning-layout>
+        
+    </div>
+
+
+</lightning-tab>    
+
+</lightning-tabset>
+
+
+<label for="FieldSelect" class="slds-form-element__label slds-no-flex">
+    <abbr title="required" class="slds-required" >*</abbr>
+    Select Filter Condition
+</label>
+<div >
+<select class="slds-form-element__label" name = "optionSelect" onchange={handleChange} >
+    <option value="OPTION A">OPTION A</option>
+    <option value="OPTION B">OPTION B</option>
+</select>
+</div>
+<lightning-button label=" Add" onclick={addCandidateHandler} class="slds-align_absolute-center" variant="brand">
+</lightning-button>
+<div>
+    <span class="slds-form-element__label">
+        Selected Value : {selectedOption}
+    </span>
+</div>
+</div>
+</template>
